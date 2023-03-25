@@ -1,0 +1,187 @@
+﻿@model Printer.Core.VM.ShoppingCartVM
+@using Microsoft.Extensions.Options
+@inject IOptions<Printer.Utilities.StripeSettings> Stripe
+
+<div class="inner-banner inner-bg6">
+	<div class="container">
+		<div class="inner-title">
+			<h3>Summary</h3>
+			<ul>
+				<li>
+					<a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+				</li>
+				<li>
+					<i class='bx bxs-chevrons-right'></i>
+				</li>
+				<li>Summary</li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+
+<form method="post">
+<section class="checkout-area pt-100 pb-70">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12 col-md-12">
+				<div class="checkout-user">
+					<i class="fas fa-sign-out-alt"></i>
+						<span>Not sure yet? <a asp-action="Index" class="default-btn btn-sm text-dark">Back to Cart</a></span>
+				</div>
+			</div>
+		</div>
+			<div class="row">
+				<div class="col-lg-6 col-md-12">
+					<div class="billing-details">
+						<h3 class="title">Billing Details</h3>
+						<div class="row">
+							@*<div class="col-lg-12 col-md-12">
+								<div class="form-group">
+									<label>Country <span class="required">*</span></label>
+									<div class="select-box">
+										<select class="form-control">
+											<option value="5">United Arab Emirates</option>
+											<option value="1">China</option>
+											<option value="2">United Kingdom</option>
+											<option value="0">Germany</option>
+											<option value="3">France</option>
+											<option value="4">Japan</option>
+										</select>
+									</div>
+								</div>
+							</div>*@
+							<div class="col-lg-6 col-md-6">
+								<div class="form-group">
+									<input asp-for="OrderHeader.Name" class="form-control" />
+									<span asp-validation-for="OrderHeader.Name" class="text-danger"></span>
+								</div>
+							</div>
+							
+							@*<div class="col-lg-12 col-md-12">
+								<div class="form-group">
+									<label>Company Name</label>
+									<input type="text" class="form-control">
+								</div>
+							</div>*@
+							<div class="col-lg-12 col-md-6">
+								<div class="form-group">
+									<input asp-for="OrderHeader.StreetAddress" class="form-control" />
+									<span asp-validation-for="OrderHeader.StreetAddress" class="text-danger"></span>
+								</div>
+							</div>
+							<div class="col-lg-12 col-md-6">
+								<div class="form-group">
+									<input asp-for="OrderHeader.City" class="form-control" />
+									<span asp-validation-for="OrderHeader.City" class="text-danger"></span>
+								</div>
+							</div>
+							<div class="col-lg-6 col-md-6">
+								<div class="form-group">
+									<input asp-for="OrderHeader.State" class="form-control" />
+									<span asp-validation-for="OrderHeader.State" class="text-danger"></span>
+								</div>
+							</div>
+							<div class="col-lg-6 col-md-6">
+								<input asp-for="OrderHeader.PostalCode" class="form-control" />
+								<span asp-validation-for="OrderHeader.PostalCode" class="text-danger"></span>
+							</div>
+						@*	<div class="col-lg-6 col-md-6">
+								<div class="form-group">
+									<label>Email Address <span class="required">*</span></label>
+									<input type="email" class="form-control">
+								</div>
+							</div>*@
+							<div class="col-lg-6 col-md-6">
+								<div class="form-group">
+									<input asp-for="OrderHeader.PhoneNumber" class="form-control" />
+									<span asp-validation-for="OrderHeader.PhoneNumber" class="text-danger"></span>
+								</div>
+							</div>
+							<div class="col-lg-6 col-md-6">
+								<div class="form-group">
+							<p class="form-control" style="color:red; font-size:14px;">
+								Estimate Arrival Date:
+								@DateTime.Now.AddDays(1).ToShortDateString() - @DateTime.Now.AddDays(7).ToShortDateString()
+								</div>
+							</p>
+							</div>
+							@*<div class="col-lg-12 col-md-12">
+								<div class="form-check">
+									<input type="checkbox" class="form-check-input" id="create-an-account">
+									<label class="form-check-label" for="create-an-account">Create an account?</label>
+								</div>
+							</div>*@
+						@*	<div class="col-lg-12 col-md-12">
+								<div class="form-check">
+									<input type="checkbox" class="form-check-input" id="ship-different-address">
+									<label class="form-check-label" for="ship-different-address">Ship to a different address?</label>
+								</div>
+							</div>*@
+						@*	<div class="col-lg-12 col-md-12">
+								<div class="form-group">
+<textarea name="notes" id="notes" cols="30" rows="5" placeholder="Order Notes" class="form-message"></textarea>
+								</div>
+							</div>*@
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-6 col-md-12">
+					<div class="order-details">
+						<div class="order-table table-responsive">
+							<h3>Your Order</h3>
+							<table class="table table-bordered">
+								<thead>
+									<tr>
+										<th scope="col">Product Name</th>
+										<th scope="col">Quantity</th>
+										<th scope="col">Total</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										@foreach(var details in Model.ListCart)
+								{
+										<td class="product-name">
+											<a href="#"><h6 class="my-0">@details.Product.Name</h6></a>
+										</td>
+										<td class="product-name">
+												<a href="#">@details.Count</a>
+										</td>
+										<td class="product-total">
+												<span class="subtotal-amount">@((details.Price * details.Count).ToString("C2"))</span>
+										</td>
+								}
+									</tr>
+								
+									
+									<tr>
+								
+										<td class="total-price">
+											<span>Order Total (ZAR)</span>
+										</td>
+										<td class="product-name">
+											<a href="#"></a>
+										</td>
+										<td class="product-subtotal">
+											<span class="subtotal-amount">@Model.OrderHeader.OrderTotal.ToString("C2")</span>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div class="payment-box">
+							<div class="payment-method">
+								
+							</div>
+							<button type="submit" value="Place Order" class="default-btn three">
+								<i class="bx bxl-stripe"></i>
+								Place Order
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+	</div>
+</section>
+</form>

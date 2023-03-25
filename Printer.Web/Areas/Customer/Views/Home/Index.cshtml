@@ -1,0 +1,113 @@
+﻿@model IPagedList<Product>
+@using X.PagedList;
+@using X.PagedList.Mvc.Core;
+@using X.PagedList.Web.Common;
+
+@{
+    ViewBag.Title = "DigiPix";
+}
+
+<div class="main-banner">
+    <div class="container-fluid">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <div class="banner-content">
+                    <h1>We Are DigiPix SA</h1>
+                    <p>
+                        At DigiPix SA, we are committed to delivering exceptional customer service and exceeding our clients' expectations.
+                        Our team works closely with clients to understand their unique printing needs and tailor solutions that best fit
+                        their requirements and budget. With our commitment to quality, efficiency, and reliability, DigiPix SA
+                        is the go-to digital printing partner for businesses across industries.
+                    </p>
+                    <div class="banner-btn">
+                        <a class="default-btn" asp-area="" asp-controller="Services" asp-action="Index">Product</a>
+                        <a class="default-btn" asp-area="Customer" asp-controller="Contact" asp-action="Index">Contact</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 pe-0">
+                <div class="banner-img">
+                    <img src="~/images/home1/digi.png" alt="Banner Images">
+                    <div class="banner-into-slider owl-carousel owl-theme">
+                        <div class="banner-item">
+                            <img src="~/images/home1/s-11.png" alt="Banner Images">
+                        </div>
+                        <div class="banner-item">
+                            <img src="~/images/home1/s-2.jpg" alt="Banner Images">
+                        </div>
+                        <div class="banner-item">
+                            <img src="~/images/home1/s-3.jpg" alt="Banner Images">
+                        </div>
+                        <div class="banner-item">
+                            <img src="~/images/home1/s-4.jpg" alt="Banner Images">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="row pb-3">
+    @foreach (var product in Model)
+    {
+        <div class="col-lg-4 col-md-6">
+            <div class="product-card p-3">
+                <div class="text-center">
+                    <img src="@product.ImageUrl" class="img-fluid" alt="" />
+                </div>
+                <div class="product-content">
+                    <a asp-area="" asp-controller="Products" asp-action="Details">
+                        <h3>@product.Name</h3>
+                    </a>
+                    <p><span>@product.Price.ToString("C2")</span> +vat</p>
+                    <div class="product-cart">
+                        <ul>
+                            <li>
+                                <a asp-action="Details" asp-route-productId="@product.Id">
+                                    <i class='bx bx-heart'></i>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+
+<div class="pagination-area">
+    <nav aria-label="Page navigation example text-center">
+        <ul class="pagination">
+            <li class="page-item">
+                @Html.PagedListPager(Model, page => Url.Action("Index", new { page }), new PagedListRenderOptions
+                {
+                LinkToFirstPageFormat = "<a class='page-link' href='{0}'><i class='fa fa-angle-double-left'></i></a>",
+                LinkToPreviousPageFormat = "<i class='fa fa-angle-left'></i>",
+                LinkToNextPageFormat = "<i class='fa fa-angle-right'></i>",
+                LinkToLastPageFormat = "<i class='fa fa-angle-double-right'></i>",
+                UlElementClasses = new[] { "pagination" },
+                LiElementClasses = new[] { "page-item" },
+                PageClasses = new[] { "page-link" },
+                ActiveLiElementClass = "current",
+                ContainerDivClasses = new[] { "pagination" },
+                MaximumPageNumbersToDisplay = 5,
+                PageCountAndCurrentLocationFormat = "Page {0} of {1}"
+                })
+            </li>
+
+        </ul>
+    </nav>
+</div>
+
+<style>
+    .product-card {
+        height: auto; /* make the card fill its parent container */
+    }
+    
+</style>
+

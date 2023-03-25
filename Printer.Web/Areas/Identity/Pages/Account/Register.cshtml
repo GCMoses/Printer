@@ -1,0 +1,189 @@
+﻿@page
+@model RegisterModel
+@using Printer.Utilities
+@{
+    ViewData["Title"] = "Register";
+}
+
+<div class="inner-banner inner-bg9">
+<div class="container">
+    <div class="inner-title">
+        <h3>Register</h3>
+        <ul>
+            <li>
+                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+            </li>
+            <li>
+                <i class='bx bxs-chevrons-right'></i>
+            </li>
+            <li>Register</li>
+        </ul>
+    </div>
+</div>
+</div>
+
+
+<section class="sing-up-area ptb-100">
+    <div class="container">
+        <div class="contact-wrap-form sing-in-width">
+            <div class="section-title text-center">
+                @if (User.IsInRole(Statics.Role_Admin))
+                {
+                    <span>Register</span>
+                    <h2>Create An Admin Account!</h2>
+                }
+                else
+                {
+                  @ViewData["Title"]
+                
+                <span>Register</span>
+                <h2>Create An Account!</h2>
+                }
+                <p>with your social network</p>
+                <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                    <ul class="sing-social-icon">
+                          @foreach (var provider in Model.ExternalLogins)
+                                    {
+                    <li>
+                                @if (provider.Name.ToLower().Contains("facebook"))
+                                {
+                                    <button type="submit" class="default-btn form-control"
+                                            name="provider" value="@provider.Name"
+                                            title="Log in using your @provider.DisplayName account">
+                                        <i class="bx bxl-facebook"></i> @provider.DisplayName
+                                    </button>
+                                }
+                    </li>
+                   
+                    <li>
+                            @if (provider.Name.ToLower().Contains("google"))
+                            {
+                                <button type="submit" class="default-btn form-control"
+                                        name="provider" value="@provider.Name"
+                                        title="Log in using your @provider.DisplayName account">
+                                    <i class="bx bxl-google-plus"></i> @provider.DisplayName
+                                </button>
+                            }
+                          
+                    </li>
+                    }
+                </ul>
+
+                </form>
+            </div>
+            <form id="registerForm" class="row" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <input asp-for="Input.Name" class="form-control" aria-required="true" />
+                            <label asp-for="Input.Name"></label>
+                            <span asp-validation-for="Input.Name" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-group">
+                                <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" />
+                                <label asp-for="Input.Email"></label>
+                                <span asp-validation-for="Input.Email" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-group">
+                            <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" />
+                            <label asp-for="Input.Password"></label>
+                            <span asp-validation-for="Input.Password" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-group">
+                            <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" />
+                            <label asp-for="Input.ConfirmPassword"></label>
+                            <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-group">
+                            <input asp-for="Input.PhoneNumber" class="form-control" aria-required="true" />
+                            <label asp-for="Input.PhoneNumber"></label>
+                            <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-group">
+                            <input asp-for="Input.StreetAddress" class="form-control" aria-required="true" />
+                            <label asp-for="Input.StreetAddress"></label>
+                            <span asp-validation-for="Input.StreetAddress" class="text-danger"></span>
+                        </div>
+                    </div>
+                     <div class="col-12">
+                        <div class="form-group">
+                            <input asp-for="Input.City" class="form-control" aria-required="true" />
+                            <label asp-for="Input.City"></label>
+                            <span asp-validation-for="Input.City" class="text-danger"></span>
+                        </div>
+                    </div>
+                     <div class="col-12">
+                        <div class="form-group">
+                            <input asp-for="Input.State" class="form-control" aria-required="true" />
+                            <label asp-for="Input.State"></label>
+                            <span asp-validation-for="Input.State" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-group">
+                            <input asp-for="Input.PostalCode" class="form-control" aria-required="true" />
+                            <label asp-for="Input.PostalCode"></label>
+                            <span asp-validation-for="Input.PostalCode" class="text-danger"></span>
+                        </div>
+                    </div>
+                    @if (User.IsInRole(Statics.Role_Admin))
+                    {
+
+                        <div class="form-floating py-2 col-6">
+                            <select asp-for="Input.Role" asp-items="@Model.Input.RoleList" class=form-select>
+                                <option disabled selected>-Select Role-</option>
+                            </select>
+
+                        </div>
+                        <div class="form-floating py-2 col-6">
+                            <select asp-for="Input.CompanyId" style="display:none;" asp-items="@Model.Input.CompanyList" class=form-select>
+                                <option disabled selected>--Select Company--</option>
+                            </select>
+
+                        </div>
+                    }
+                 
+                    <div class="col-12 text-center">
+                        <button class="default-btn btn-two sing-btn" id="registerSubmit" type="submit">
+                            Register
+                        </button>
+                    </div>
+                    <div class="col-12">
+                        <p class="account-desc">
+                            Already have an account?
+                            <a class="nav-link" id="login" asp-area="Identity" asp-page="/Account/Login">Login</a>
+                        </p>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        $(document).ready(function () {
+            $('#Input_Role').change(function () {
+                var selection = $('#Input_Role Option:Selected').text();
+                if (selection != 'Company') {
+                    $('#Input_CompanyId').hide();
+                }
+                else {
+                    $('#Input_CompanyId').show();
+                }
+            })
+        })
+    </script>
+}

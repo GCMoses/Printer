@@ -1,0 +1,47 @@
+﻿<div class="inner-banner inner-bg7">
+	<div class="container">
+		<div class="inner-title">
+			<h3>Company</h3>
+			<ul>
+				<li>
+					<a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+				</li>
+				<li>
+					<i class='bx bxs-chevrons-right'></i>
+				</li>
+				<li>Company</li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+<div class="container p-3">
+	<div class="row pt-4">
+		<div class="col-6">
+			<h2 class="text-dark">Company List</h2>
+		</div>
+		<div class="col-6 text-end">
+			<a asp-controller="Company" asp-action="Upsert" class="default-btn">
+				<i class="bx bx-edit-alt"></i> &nbsp; Create New Company
+			</a>
+		</div>
+	</div>
+	<br /><br />
+
+	<table id="tblData" class="table table-bordered table-striped" style="width:100%">
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>StreetAddress</th>
+				<th>City</th>
+				<th>Email</th>
+				<th>PhoneNumber</th>
+				<th><</th>
+			</tr>
+		</thead>
+	</table>
+</div>
+
+@section Scripts{
+<script src="~/js/company.js"></script>
+}

@@ -1,0 +1,95 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+.pagination-area {
+    text-align: center;
+    margin-top: 20px;
+    margin-right: auto;
+    margin-left: auto;
+    display: table;
+}
+
+.pagination-area .pagination-item {
+    margin-bottom: 30px;
+}
+
+.pagination-area .page-link {
+    color: #ff743c;
+    background-color: #fff;
+    -webkit-box-shadow: 0 0 15px #d0d0d0;
+    box-shadow: 0 0 15px #d0d0d0;
+    width: 40px;
+    height: 40px;
+    border: 1px solid #fff;
+    line-height: 24px;
+    -webkit-transition: all .5s;
+    transition: all .5s;
+    font-weight: 700;
+}
+
+.pagination-area .page-link i {
+    margin-right: -4px;
+    font-size: 21px;
+}
+
+.pagination-area .page-link i::before {
+    margin-left: -4px;
+}
+
+/* First and Last page links */
+.pagination-area .first-page-link i::before {
+    content: "\f100";
+    font-family: "Font Awesome 5 Free";
+}
+
+.pagination-area .last-page-link i::before {
+    content: "\f101";
+    font-family: "Font Awesome 5 Free";
+}
+
+.pagination-area .page-link.current,
+.pagination-area .page-link:hover,
+.pagination-area .page-link:focus {
+    color: #fff;
+    background-color: #ff743c;
+    border: 1px solid #ff743c;
+}
+
+.pagination-area .page-item {
+    padding: 0 8px;
+}
+
+.pagination-area .page-item:first-child .page-link {
+    border-radius: none;
+}
+
+.pagination-area .page-item:last-child .page-link {
+    border-radius: none;
+}
+
+.pagination-area .page-item.current .page-link {
+    z-index: 1;
+    color: #fff;
+    background-color: #ff743c;
+    border-color: #ff743c;
+}

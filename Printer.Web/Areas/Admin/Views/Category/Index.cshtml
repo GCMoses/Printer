@@ -1,0 +1,69 @@
+﻿@model IEnumerable<Printer.Core.Models.Category>
+@{
+    ViewData["Title"] = "Index";
+}
+<div class="inner-banner inner-bg7">
+    <div class="container">
+        <div class="inner-title">
+            <h3>Category</h3>
+            <ul>
+                <li>
+                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                </li>
+                <li>
+                    <i class='bx bxs-chevrons-right'></i>
+                </li>
+                <li>Category</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<partial name="_Notification" />
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-dark">Category List</h2>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-controller="Category" asp-action="Create" class="default-btn" style="display: inline-block">
+                <i class="bx bx-edit-alt"></i> &nbsp; Create New Category
+            </a>
+        </div>
+    </div>
+    <br /><br />
+
+    <table class="table table-bordered table-striped" style="width:100%">
+        <thead>
+            <tr>
+                <th>
+                    Category Name
+                </th>
+                <th>
+                    Display Order
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var obj in Model)
+            {
+                <tr>
+                    <td width="50%">
+                        @obj.Name
+                    </td>
+                    <td width="30%">
+                        @obj.DisplayOrder
+                    </td>
+                    <td>
+                        <div class="w-75 btn-group" role="group">
+                            <a asp-controller="Category" asp-action="Edit" asp-route-id="@obj.Id"
+                               class="default-btn mx-2" style="height: 70px; width: 30px; text-align: left"> <i class="bx bxs-edit"></i> </a>
+                            <a asp-controller="Category" asp-action="Delete" asp-route-id="@obj.Id"
+                               class="default-btn mx-2" style="height: 70px; width: 30px; text-align: left"> <i class="bx bxs-trash"></i></a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+</div>

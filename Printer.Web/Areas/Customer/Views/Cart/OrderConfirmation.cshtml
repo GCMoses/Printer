@@ -1,0 +1,31 @@
+﻿@model int
+
+<div class="inner-banner inner-bg6">
+	<div class="container">
+		<div class="inner-title">
+			<h3>Order Confirmation</h3>
+			<ul>
+				<li>
+					<a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+				</li>
+				<li>
+					<i class='bx bxs-chevrons-right'></i>
+				</li>
+				<li>Order Confirmation</li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+<div class="container row pt-4">
+    <div class="col-12 text-center">
+        <h1 class="text-dark text-center">Order Placed Successfully!</h1>
+        Your Order Number is : @Model <br /><br />
+        <img src="~/images/confirm.png" width="65%" />
+    </div>
+    <div class="col-12 text-center" style="color:orangered">
+        <br />
+        Your order has been placed successfully with us, keep track of your order id & have a good day! <br />
+
+    </div>
+</div> 

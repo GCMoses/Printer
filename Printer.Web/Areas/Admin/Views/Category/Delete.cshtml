@@ -1,0 +1,46 @@
+﻿@model Printer.Core.Models.Category
+<div class="inner-banner inner-bg7">
+    <div class="container">
+        <div class="inner-title">
+            <h3>Category Delete</h3>
+            <ul>
+                <li>
+                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                </li>
+                <li>
+                    <i class='bx bxs-chevrons-right'></i>
+                </li>
+                <li>Category Delete</li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+<form method="post" asp-action="Delete">
+	<input asp-for="Id" hidden />
+	<div class="border p-3 mt-4">
+		<div class="row pb-2">
+			<h2 class="text-dark">Delete Category</h2>
+			<hr />
+		</div>
+		@*<div asp-validation-summary="All"></div>*@
+		<div class="mb-3">
+			<label asp-for="Name"></label>
+			<input asp-for="Name" disabled class="form-control" />
+		</div>
+		<div class="mb-3">
+			<label asp-for="DisplayOrder"></label>
+			<input asp-for="DisplayOrder" disabled class="form-control" />
+		</div>
+		<div style="clear: both;">
+			<button type="submit" class="default-btn" style="display: inline-block; box-sizing: content-box; margin: 0; padding: 0; width: 150px; height: 35px; vertical-align: middle;">Delete</button>
+			<a asp-controller="Category" asp-action="Index" class="default-btn" style="display: inline-block; box-sizing: content-box; margin: 0; padding: 0; width: 150px; height: 35px; float: none; vertical-align: middle;">Back</a>
+		</div>
+	</div>
+</form>
+
+@section Scripts{
+	@{
+		<partial name="_ValidationScriptsPartial" />
+	}
+}

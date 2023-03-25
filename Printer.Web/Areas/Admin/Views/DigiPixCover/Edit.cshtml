@@ -1,0 +1,43 @@
+﻿@model Printer.Core.Models.DigiPixCover
+
+<div class="inner-banner inner-bg7">
+	<div class="container">
+		<div class="inner-title">
+			<h3>Edit Cover</h3>
+			<ul>
+				<li>
+					<a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+				</li>
+				<li>
+					<i class='bx bxs-chevrons-right'></i>
+				</li>
+				<li>Edit Cover</li>
+			</ul>
+		</div>
+	</div>
+</div>
+<form method="post" asp-action="Edit">
+	<div class="border p-3 mt-4">
+		<div class="row pb-2">
+			<h2 class="text-dark">Edit DigiPix Cover</h2>
+			<hr />
+		</div>
+		@*<div asp-validation-summary="All"></div>*@
+		<div class="mb-3">
+			<label asp-for="Name"></label>
+			<input asp-for="Name" class="form-control" />
+			<span asp-validation-for="Name" class="text-danger"></span>
+		</div>
+
+		<div style="clear: both;">
+			<button type="submit" class="default-btn" style="display: inline-block; box-sizing: content-box; margin: 0; padding: 0; width: 150px; height: 35px; vertical-align: middle;">Update</button>
+			<a asp-controller="DigiPixCover" asp-action="Index" class="default-btn" style="display: inline-block; box-sizing: content-box; margin: 0; padding: 0; width: 150px; height: 35px; float: none; vertical-align: middle;">Back</a>
+		</div>
+	</div>
+</form>
+
+@section Scripts{
+	@{
+		<partial name="_ValidationScriptsPartial" />
+	}
+}
