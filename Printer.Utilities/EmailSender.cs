@@ -1,8 +1,7 @@
-﻿using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using MimeKit;
 using MailKit.Net.Smtp;
 using Microsoft.Extensions.Configuration;
-using DigiPixWebUtilities;
 using MimeKit;
 
 namespace Printer.Utilities;
