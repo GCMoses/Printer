@@ -19,7 +19,7 @@ public class EmailSender : IEmailSender
     public Task SendEmailAsync(string email, string subject, string htmlMessage)
     {
         var emailToSend = new MimeMessage();
-        emailToSend.From.Add(MailboxAddress.Parse("devsoluz@gmail.com"));
+        emailToSend.From.Add(MailboxAddress.Parse(_config.GetSection("EmailConfiguration"));
         emailToSend.To.Add(MailboxAddress.Parse(email));
         emailToSend.Subject = subject;
         emailToSend.Body = new TextPart(MimeKit.Text.TextFormat.Html) { Text = htmlMessage };
